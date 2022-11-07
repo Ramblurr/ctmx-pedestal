@@ -20,6 +20,9 @@
   (person-by-id person-id))
 
 (defcomponent ^:endpoint a-form [req idx person-id]
+   ;; why is (value "person-id") always nil both on GET and POST
+  (tap> {:person-id-value (value "person-id")})
+
   (ctmx/with-req req
     (let [params    (-> req :form-params form/json-params-pruned)
           idx       (or idx (:idx params))
