@@ -1,5 +1,6 @@
 (ns ctmx-pedestal.demo
   (:require
+   [ctmx-pedestal.mapped-forms :as mapped.forms]
    [ctmx.core :as ctmx :refer [defcomponent make-routes]]
    [hiccup.page :as hiccup.page]
    [reitit.http.interceptors.parameters :as parameters]
@@ -53,6 +54,10 @@
    ["/"
     {:get {:handler (fn [req]
                       {:status 200 :body "Go to /ctmx-demo"})}}]
+   (make-routes "/mapped-forms"
+                (fn [req]
+                  (page (mapped.forms/mapped-forms req))))
+
    (make-routes "/ctmx-demo"
                 (fn [req]
                   (page (demo-comp req 0))))])
