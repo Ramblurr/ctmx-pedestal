@@ -11,12 +11,12 @@
 
 (defn person-by-id [person-id]
   (get @people person-id))
+
 (defn update-person! [person-id name email]
   (swap! people #(update-in % [person-id] (fn [person]
                                             (-> person
                                                 (assoc :person/name name)
                                                 (assoc :person/email email)))))
-
   (person-by-id person-id))
 
 (defcomponent ^:endpoint a-form [req idx person-id]
